@@ -79,6 +79,12 @@ class EventEdit(generic.UpdateView):
     fields = ['title', 'description', 'start_time', 'end_time']
     template_name = 'event.html'
 
+def Event_Delete(request, id):
+        Event.objects.get(id=id).delete()
+
+        data = Event.objects.filter()[:10]
+        return redirect('/',{'data': data})
+
 @login_required(login_url='signup')
 def event_details(request, event_id):
     event = Event.objects.get(id=event_id)
